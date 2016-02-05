@@ -130,6 +130,10 @@ h1, h2, h3 {
     fill: #7F6A9B;
 }
 
+.node-type-implicit {
+    fill: #BBA898;
+}
+
 .node-type-sink .node-label {
     color: #FFF;
 }

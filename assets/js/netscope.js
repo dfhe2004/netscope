@@ -477,7 +477,8 @@ module.exports = (function() {
       if (s0 === peg$FAILED) {
         s0 = peg$parsepairs();
       }
-
+	  //console.log(peg$computePosDetails(peg$reportedPos).line);
+	  s0.line = peg$computePosDetails(peg$reportedPos).line;
       return s0;
     }
 
@@ -1590,6 +1591,7 @@ module.exports = Layer = (function() {
         headerKeys = ['name', 'type', 'top', 'bottom'];
         _.extend(layer, _.pick(layerDesc, headerKeys));
         layer.params = _.omit(layerDesc, headerKeys);
+		layer.line = entry.line;
         layers.push(layer);
       } else {
         console.log('Unidentified entry ignored: ', entry);
@@ -1861,7 +1863,11 @@ module.exports = Renderer = (function() {
     s += '<span class="node-title">' + layer.name + '</span>';
     s += ' &middot; ';
     s += '<span class="node-type">' + this.renderKey(layer.type) + '</span>';
-    s += '</div>';
+    if (layer.line!= undefined)  {
+		s += ' &middot; ';
+		s += '<span class="node-type">[' + layer.line + ']</span>';
+    }
+	s += '</div>';
     s += this.renderSection(node.layers[0].params);
     return s;
   };
