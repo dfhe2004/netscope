@@ -1550,9 +1550,12 @@ module.exports = Editor = (function() {
     this.editor = CodeMirror($editorBox[0], {
       value: '# Enter your network definition here.\n# Use Shift+Enter to update the visualization.',
       lineNumbers: true,
+	  foldGutter: true,
+      gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
       lineWrapping: true
     });
-    this.editor.on('keydown', (function(_this) {
+	this.editor.foldCode(CodeMirror.Pos(13, 0));    
+	this.editor.on('keydown', (function(_this) {
       return function(cm, e) {
         return _this.onKeyDown(e);
       };
