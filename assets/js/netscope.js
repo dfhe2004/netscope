@@ -1554,7 +1554,7 @@ module.exports = Editor = (function() {
       gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
       lineWrapping: true
     });
-	this.editor.foldCode(CodeMirror.Pos(13, 0));    
+	//this.editor.foldCode(CodeMirror.Pos(13, 0));    
 	this.editor.on('keydown', (function(_this) {
       return function(cm, e) {
         return _this.onKeyDown(e);
