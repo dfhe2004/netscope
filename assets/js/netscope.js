@@ -2092,7 +2092,7 @@ AppController = (function() {
 			var args;
 			args = 1 <= arguments.length ? slice.call(arguments, 0) : [];
 			_this.makeLoader(Source.fromPreset)(args);
-			var editor = _this.showEditor();
+			_this.showEditorWithTxt(_this);
 		};
 	  })(this), 
 	  //this.makeLoader(Source.fromPreset),
