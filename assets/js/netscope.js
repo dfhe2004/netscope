@@ -2074,7 +2074,7 @@ AppController = (function() {
       '/url/(.+)': this.makeLoader(Source.fromURL),
       '/preset/:name': (function(_this){
 		return function(){
-			_this.makeLoader(Source.fromURL)();
+			_this.makeLoader(Source.fromPreset)();
 			_this.showEditor();
 		};
 	  })(this), 
