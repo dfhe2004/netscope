@@ -2053,7 +2053,7 @@ AppController = (function() {
     var loader;
     loader = this.makeLoader(Source.fromProtoText);
     if (_.isUndefined(window.CodeMirror)) {
-      return $.getScript('assets/js/lib/codemirror.min.js', function() {
+      return $.getScript('assets/js/lib/codemirror.min.js', function(_this) {
           this.netEditor = new Editor(loader);
 		   	
 	  });
