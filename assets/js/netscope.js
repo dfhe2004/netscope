@@ -1934,6 +1934,7 @@ fromProtoText = function(txt, callback) {
   if (!_.isUndefined(callback)) {
     callback(net);
   }
+  net._data = txt;
   return net;
 };
 
@@ -2045,6 +2046,7 @@ AppController = (function() {
         return this.netEditor = new Editor(loader);
       });
     }
+	return this.netEditro;
   };
 
   AppController.prototype.showDocumentation = function() {
@@ -2076,8 +2078,8 @@ AppController = (function() {
 		return function(){
 			var args;
 			args = 1 <= arguments.length ? slice.call(arguments, 0) : [];
-			_this.makeLoader(Source.fromPreset)(args);
-			_this.showEditor();
+			var net = _this.makeLoader(Source.fromPreset)(args);
+			var editor = _this.showEditor();
 		};
 	  })(this), 
 	  //this.makeLoader(Source.fromPreset),
