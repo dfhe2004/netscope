@@ -2013,7 +2013,9 @@ AppController = (function() {
     return loader.apply(null, slice.call(args).concat([(function(_this) {
       return function(net) {
         _this._net = net;
-		_this._editor.setValue(net._data);
+		if ((typeof _this._editor !== "undefined")){
+			_this._editor.setValue(net._data);
+		}
 		return _this.completeLoading(net);
       };
     })(this)]));
@@ -2060,6 +2062,9 @@ AppController = (function() {
       return $.getScript('assets/js/lib/codemirror.min.js', function() {
 		   this.netEditor = new Editor(loader['fn']);
 		   loader['app']._editor = this.netEditor.editor;
+		   if ((typeof loader['app'].net!=="undefined")&&(typeof loader['app'].net._data!=="undefined"))  {
+				loader['app']._editor.setValue(loader['app'].net._data);
+		   }
 	  });
     }
   };
