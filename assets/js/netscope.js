@@ -2012,7 +2012,8 @@ AppController = (function() {
     this.$spinner.show();
     return loader.apply(null, slice.call(args).concat([(function(_this) {
       return function(net) {
-        return _this.completeLoading(net);
+        _this._net = net;
+		return _this.completeLoading(net);
       };
     })(this)]));
   };
@@ -2046,7 +2047,6 @@ AppController = (function() {
         return this.netEditor = new Editor(loader);
       });
     }
-	return this.netEditro;
   };
 
   AppController.prototype.showDocumentation = function() {
@@ -2078,7 +2078,7 @@ AppController = (function() {
 		return function(){
 			var args;
 			args = 1 <= arguments.length ? slice.call(arguments, 0) : [];
-			var net = _this.makeLoader(Source.fromPreset)(args);
+			_this.makeLoader(Source.fromPreset)(args);
 			var editor = _this.showEditor();
 		};
 	  })(this), 
