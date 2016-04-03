@@ -2062,8 +2062,8 @@ AppController = (function() {
       return $.getScript('assets/js/lib/codemirror.min.js', function() {
 		   this.netEditor = new Editor(loader['fn']);
 		   loader['app']._editor = this.netEditor.editor;
-		   if (!_.isUndefined(loader['app'].net) && !_.isUndefined(loader['app'].net._data))  {
-				loader['app']._editor.setValue(loader['app'].net._data);
+		   if (!_.isUndefined(loader['app']._net) && !_.isUndefined(loader['app']._net._data))  {
+				loader['app']._editor.setValue(loader['app']._net._data);
 		   }
 	  });
     }
