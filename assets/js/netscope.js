@@ -1550,11 +1550,11 @@ module.exports = Editor = (function() {
     this.editor = CodeMirror($editorBox[0], {
       value: '# Enter your network definition here.\n# Use Shift+Enter to update the visualization.',
       lineNumbers: true,
-	  foldGutter: true,
-      gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+	  //foldGutter: true,
+      //gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
       lineWrapping: true
     });
-	//this.editor.foldCode(CodeMirror.Pos(13, 0));    
+	
 	this.editor.on('keydown', (function(_this) {
       return function(cm, e) {
         return _this.onKeyDown(e);
@@ -2013,6 +2013,7 @@ AppController = (function() {
     return loader.apply(null, slice.call(args).concat([(function(_this) {
       return function(net) {
         _this._net = net;
+		_this._editor.setValue(net._data);
 		return _this.completeLoading(net);
       };
     })(this)]));
@@ -2050,20 +2051,16 @@ AppController = (function() {
   };
 
   AppController.prototype.showEditorWithTxt = function(_this) {
-    var loader;
-    
-	var cb = (function(this_){
-		return function(){
-          this.netEditor = new Editor(loader);
-		}
-	})(_this);
+    var loader = {
+		'fn': this.makeLoader(Source.fromProtoText),
+		'app': _this
+	};
 
-    loader = this.makeLoader(Source.fromProtoText);
-    if (_.isUndefined(window.CodeMirror)) {
-      //return $.getScript('assets/js/lib/codemirror.min.js', function() {
-      //   this.netEditor = new Editor(loader);
-	  //});
-      return $.getScript('assets/js/lib/codemirror.min.js', cb);
+	if (_.isUndefined(window.CodeMirror)) {
+      return $.getScript('assets/js/lib/codemirror.min.js', function() {
+		   this.netEditor = new Editor(loader['fn']);
+		   loader['app']._editor = this.netEditor.editor;
+	  });
     }
   };
 
@@ -2098,8 +2095,8 @@ AppController = (function() {
 		return function(){
 			var args;
 			args = 1 <= arguments.length ? slice.call(arguments, 0) : [];
-			_this.makeLoader(Source.fromPreset)(args);
 			_this.showEditorWithTxt(_this);
+			_this.makeLoader(Source.fromPreset)(args);
 		};
 	  })(this), 
 	  //this.makeLoader(Source.fromPreset),
