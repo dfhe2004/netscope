@@ -1971,7 +1971,9 @@ exports.fromURL = function(url, callback) {
 
 exports.fromPreset = function(name, callback) {
   return $.get('./presets/' + name + '.prototxt', function(data) {
-    return callback(fromProtoText(data));
+    
+	var net = callback(fromProtoText(data));
+	return net;
   });
 };
 
