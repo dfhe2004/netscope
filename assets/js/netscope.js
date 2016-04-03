@@ -2049,6 +2049,19 @@ AppController = (function() {
     }
   };
 
+  AppController.prototype.showEditorWithTxt = function(_this) {
+    var loader;
+    loader = this.makeLoader(Source.fromProtoText);
+    if (_.isUndefined(window.CodeMirror)) {
+      return $.getScript('assets/js/lib/codemirror.min.js', function() {
+          this.netEditor = new Editor(loader);
+		   	
+	  });
+    }
+  };
+
+
+
   AppController.prototype.showDocumentation = function() {
     return window.location.href = 'quickstart.html';
   };
