@@ -2072,7 +2072,13 @@ AppController = (function() {
     routes = {
       '/gist/:gistID': this.makeLoader(Source.fromGist),
       '/url/(.+)': this.makeLoader(Source.fromURL),
-      '/preset/:name': this.makeLoader(Source.fromPreset),
+      '/preset/:name': (function(_this){
+		return function(){
+			_this.makeLoader(Source.fromURL)();
+			_this.showEditor();
+		};
+	  })(this), 
+	  //this.makeLoader(Source.fromPreset),
       '/editor(/?)': (function(_this) {
         return function() {
           return _this.showEditor();
